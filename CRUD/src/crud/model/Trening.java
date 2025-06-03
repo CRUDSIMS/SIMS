@@ -50,6 +50,14 @@ public class Trening extends Identifiable {
 	public void ukloniClana(Clan clan) {
 		this.spisakClanova.remove(clan);
 	}
+	
+	public boolean postojiClan(Clan clan) {
+		for (Clan c : this.spisakClanova) {
+			if (clan.getID() == c.getID()) return true;
+		}
+		return false;
+	}
+	
 	@Override
 	public String toString() {
 		return "Trening [vremeTreninga=" + vremeTreninga + ", trener=" + trener + ", ukupnoMesta=" + ukupnoMesta
