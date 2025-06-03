@@ -8,6 +8,7 @@ import java.util.List;
 import crud.model.Clan;
 import crud.model.Trening;
 import crud.model.db.Baza;
+import crud.view.OtkazivanjeTreningaView;
 
 public class OtkazivanjeTreningaController {
 	private OtkazivanjeTreningaView treningView;
@@ -29,9 +30,7 @@ public class OtkazivanjeTreningaController {
 		return naredniTreninzi;
 	}
 	
-	public void povecajBrojSlobodnihMesta(Trening trening) {
-		trening.setUkupnoMesta(trening.getBrojSlobodnihMesta() + 1);
-	}
+
 	
 	public void obrisiTrening(Trening trening) {
 		baza.deleteTrening(trening.getID());
@@ -70,7 +69,7 @@ public class OtkazivanjeTreningaController {
 		}
 		
 		if (selektovanTrening.getUkupnoMesta() > 1) {
-			this.povecajBrojSlobodnihMesta(selektovanTrening);
+			selektovanTrening.ukloniClana(clan);
 		} else {
 			this.obrisiTrening(selektovanTrening);
 		}
