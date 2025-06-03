@@ -19,6 +19,7 @@ public class MainViewController {
 		this.mainView = mainView;
 		
 		this.mainView.addActionListenerMojiTreninzi (e -> otvoriOtkazivanje());
+		this.mainView.addActionListenerTreninzi(e -> otvoriUvidUTreningeIOdabir());
 	}
 		
 	 public void otvoriUvidUTreningeIOdabir() {

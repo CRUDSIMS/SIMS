@@ -2,13 +2,17 @@ package crud;
 
 import java.time.LocalDateTime;
 
+import crud.controller.MainViewController;
+import crud.controller.uvidUTreningIOdabir.UvidUTreningeIOdabirController;
 import crud.model.*;
 import crud.model.db.Baza;
+import crud.view.MainView;
+import crud.view.UvidUTreningeIOdabirView;
 
 public class Aplikacija {
 
 	//Clan koji je trenutno ulogovan (jer ne modelujemo login)
-	private Clan trenutniClan;
+	private static Clan trenutniClan;
 	private static Baza baza = new Baza();
 	public static void main(String[] args) {
 		
@@ -19,14 +23,18 @@ public class Aplikacija {
 		baza.ispisTreninzi();
 		
 		//TODO: Ovde inicijalizovati kontrolere i view-ove i proslediti im odgovarajuce dependecy-e
+		UvidUTreningeIOdabirView uvidView = new UvidUTreningeIOdabirView();
+		MainView mv = new MainView();
+		
+		
+		UvidUTreningeIOdabirController uvidController = new UvidUTreningeIOdabirController(uvidView, trenutniClan, baza);
+		MainViewController mvc = new MainViewController(uvidController, null, mv);
+		
+		mvc.start();
 	}
 	
 	public Clan getTrenutniClan() {
 		return trenutniClan;
-	}
-
-	public void setTrenutniClan(Clan trenutniClan) {
-		this.trenutniClan = trenutniClan;
 	}
 
 	//Rucno popunjavanje baze podataka sa testnim podacima
@@ -36,6 +44,8 @@ public class Aplikacija {
 		Clan nikolaB = baza.createClan("nikola.baric@gmail.com", "0661234569", Pol.MUSKO);
 		Clan jovan = baza.createClan("jovan.stoiljkovic@gmail.com", "0661234560", Pol.MUSKO);
 
+		trenutniClan = anja;
+		
 		Trening t1 = baza.createTrening(LocalDateTime.of(2025, 6, 10, 17, 0), "Mirko", 10);
 		t1.dodajClana(nikolaM);
 		t1.dodajClana(nikolaB);

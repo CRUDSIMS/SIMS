@@ -37,6 +37,6 @@ public class MainView extends JFrame{
 		this.mojiTreninziDugme.addActionListener(al);
 	}
 	public void addActionListenerTreninzi(ActionListener al) {
-		this.mojiTreninziDugme.addActionListener(al);
+		this.treninziDugme.addActionListener(al);
 	}
 }

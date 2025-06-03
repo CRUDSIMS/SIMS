@@ -7,6 +7,7 @@ import java.util.List;
 import crud.model.Clan;
 import crud.model.Trening;
 import crud.model.db.Baza;
+import crud.view.UvidUTreningeIOdabirView;
 
 public class UvidUTreningeIOdabirController {
 	private UvidUTreningeIOdabirView view;
@@ -18,6 +19,7 @@ public class UvidUTreningeIOdabirController {
         this.clan = clan;
         this.baza = baza;
 
+        this.view.setOdaberiTreningListener(e -> this.rezervisiTrening());
         prikaziTreninge();
     }
 	
@@ -46,20 +48,20 @@ public class UvidUTreningeIOdabirController {
 		view.init();
 	}
 	
-	public boolean rezervisiTrening(Trening trening) {
+	public boolean rezervisiTrening() {
 		Trening selektovanTrening = view.getSelektovanTrening();
 		
-        if (trening.getBrojSlobodnihMesta() <= 0) {
+        if (selektovanTrening.getBrojSlobodnihMesta() <= 0) {
         	view.prikaziPoruku("Nema slobodnih mesta.");
 			return false;
         }
 
-        if (trening.postojiClan(clan)) {
+        if (selektovanTrening.postojiClan(this.clan)) {
         	view.prikaziPoruku("Vec ste prijavljeni na taj trening.");
             return false;
         }
 
-        trening.dodajClana(clan);
+        selektovanTrening.dodajClana(this.clan);
         view.prikaziPoruku("Uspesno ste rezervisali.");
         return true;
     }
