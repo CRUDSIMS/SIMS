@@ -22,7 +22,7 @@ public class UvidUTreningeIOdabirController {
     }
 	
 	private void prikaziTreninge() {
-		List<Trening> treninzi = this.getTreninzi();
+		ArrayList<Trening> treninzi = this.getTreninzi();
 		view.prikaziTreninge(treninzi);
 	}
 	
@@ -39,6 +39,11 @@ public class UvidUTreningeIOdabirController {
 		}
 		
 		return naredniTreninzi;
+	}
+	
+	public void start() {
+		this.prikaziTreninge();
+		view.init();
 	}
 	
 	public boolean rezervisiTrening(Trening trening) {
