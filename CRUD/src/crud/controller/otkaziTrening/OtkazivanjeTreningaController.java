@@ -43,10 +43,16 @@ public class OtkazivanjeTreningaController {
 		this.treningView= treningView;
 		
 		treningView.setOtkaziTreningListener(e -> otkaziTrening());
+		
+	}
+	
+	public void start() {
+		this.prikaziTreninge();
+		treningView.init();
 	}
 	
 	private void prikaziTreninge() {
-		List<Trening> treninzi = this.getTreninzi();
+		ArrayList<Trening> treninzi = this.getTreninzi();
 		treningView.prikaziTreninge(treninzi);
 	}
 	
