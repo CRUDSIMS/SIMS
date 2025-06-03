@@ -2,6 +2,7 @@ package crud.controller;
 
 import crud.controller.otkaziTrening.OtkazivanjeTreningaController;
 import crud.controller.uvidUTreningIOdabir.UvidUTreningeIOdabirController;
+import crud.view.MainView;
 
 public class MainViewController {
 	private MainView mainView;
@@ -11,7 +12,8 @@ public class MainViewController {
 
 	
 	public MainViewController(UvidUTreningeIOdabirController uvidController,
-			OtkazivanjeTreningaController otkazivanjeController) {
+			OtkazivanjeTreningaController otkazivanjeController, 
+			MainView mainView) {
 		this.uvidController = uvidController;
 		this.otkazivanjeController = otkazivanjeController;
 		this.mainView = mainView;
@@ -20,12 +22,12 @@ public class MainViewController {
 	}
 		
 	 public void otvoriUvidUTreningeIOdabir() {
-	     	mainView.dispose()
+	     	this.mainView.dispose();
 	     	this.uvidController.start();
 	    }
 
 	 public void otvoriOtkazivanje() {
-	        mainView.dispose();
+	        this.mainView.dispose();
 	        this.otkazivanjeController.start();
 	    }
 	 
