@@ -3,10 +3,12 @@ package crud;
 import java.time.LocalDateTime;
 
 import crud.controller.MainViewController;
+import crud.controller.otkaziTrening.OtkazivanjeTreningaController;
 import crud.controller.uvidUTreningIOdabir.UvidUTreningeIOdabirController;
 import crud.model.*;
 import crud.model.db.Baza;
 import crud.view.MainView;
+import crud.view.OtkazivanjeTreningaView;
 import crud.view.UvidUTreningeIOdabirView;
 
 public class Aplikacija {
@@ -19,16 +21,18 @@ public class Aplikacija {
 		databaseSeed();
 		
 		//Test za proveru da li radi
-		baza.ispisClanovi();
-		baza.ispisTreninzi();
+//		baza.ispisClanovi();
+//		baza.ispisTreninzi();
 		
 		//TODO: Ovde inicijalizovati kontrolere i view-ove i proslediti im odgovarajuce dependecy-e
+		
+		OtkazivanjeTreningaView otkazView = new OtkazivanjeTreningaView();
 		UvidUTreningeIOdabirView uvidView = new UvidUTreningeIOdabirView();
 		MainView mv = new MainView();
 		
-		
+		OtkazivanjeTreningaController otkazController = new OtkazivanjeTreningaController(baza, trenutniClan, otkazView);
 		UvidUTreningeIOdabirController uvidController = new UvidUTreningeIOdabirController(uvidView, trenutniClan, baza);
-		MainViewController mvc = new MainViewController(uvidController, null, mv);
+		MainViewController mvc = new MainViewController(uvidController, otkazController, mv);
 		
 		mvc.start();
 	}
