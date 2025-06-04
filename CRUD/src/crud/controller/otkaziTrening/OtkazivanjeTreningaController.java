@@ -1,5 +1,6 @@
 package crud.controller.otkaziTrening;
 
+import java.awt.event.ActionListener;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -30,8 +31,6 @@ public class OtkazivanjeTreningaController {
 		return naredniTreninzi;
 	}
 	
-
-	
 	public void obrisiTrening(Trening trening) {
 		baza.deleteTrening(trening.getID());
 	}
@@ -41,13 +40,17 @@ public class OtkazivanjeTreningaController {
 		this.clan = clan;
 		this.treningView= treningView;
 		
+		treningView.init();
 		treningView.setOtkaziTreningListener(e -> otkaziTrening());
 		
 	}
 	
 	public void start() {
 		this.prikaziTreninge();
-		treningView.init();
+		treningView.start();
+	}
+	public void stop() {
+		treningView.stop();
 	}
 	
 	private void prikaziTreninge() {
@@ -63,7 +66,7 @@ public class OtkazivanjeTreningaController {
 			return;
 		}
 		
-		if(!nijeMoguce(selektovanTrening)) {
+		if(nijeMoguce(selektovanTrening)) {
 			treningView.prikaziPoruku("Ima manje od 24h do treninga.");
 			return;
 		}
@@ -75,11 +78,15 @@ public class OtkazivanjeTreningaController {
 		}
 		
 		treningView.prikaziPoruku("Trening uspesno otkazan.");
+		this.prikaziTreninge();
 	}
 	
 	private boolean nijeMoguce(Trening trening) {
 		LocalDateTime trenutnoVreme = LocalDateTime.now();
 		Duration trajanje = Duration.between(trenutnoVreme, trening.getVremeTreninga());
-		return trajanje.toHours() > 24;
+		return trajanje.toHours() < 24;
+	}
+	public void setBackDugme(ActionListener al) {
+		this.treningView.setBackDugmeListener(al);
 	}
 }

@@ -1,5 +1,6 @@
 package crud.controller.uvidUTreningIOdabir;
 
+import java.awt.event.ActionListener;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +20,7 @@ public class UvidUTreningeIOdabirController {
         this.clan = clan;
         this.baza = baza;
 
+        this.view.init();
         this.view.setOdaberiTreningListener(e -> this.rezervisiTrening());
         prikaziTreninge();
     }
@@ -45,11 +47,19 @@ public class UvidUTreningeIOdabirController {
 	
 	public void start() {
 		this.prikaziTreninge();
-		view.init();
+		view.start();
 	}
-	
+	public void stop() {
+		view.stop();
+	}
+
 	public boolean rezervisiTrening() {
 		Trening selektovanTrening = view.getSelektovanTrening();
+		
+		if(selektovanTrening == null) {
+			view.prikaziPoruku("Niste odabrali trening");
+			return false;
+		}
 		
         if (selektovanTrening.getBrojSlobodnihMesta() <= 0) {
         	view.prikaziPoruku("Nema slobodnih mesta.");
@@ -65,6 +75,8 @@ public class UvidUTreningeIOdabirController {
         view.prikaziPoruku("Uspesno ste rezervisali.");
         return true;
     }
-	
+	public void setBackDugme(ActionListener al) {
+		this.view.setBackDugmeListener(al);
+	}
 
 }

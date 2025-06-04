@@ -46,7 +46,7 @@ public class TreningTableModel extends AbstractTableModel{
 	public String getColumnName(int column) {
 		if(column == 0) return "Datum i vreme treninga";
 		if(column == 1) return "Trener";
-		if(column == 2) return "Ukupno mesta";
+		if(column == 2) return "Broj slobodnih mesta";
 		
 		return "";
 	}

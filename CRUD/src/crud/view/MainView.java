@@ -28,11 +28,17 @@ public class MainView extends JFrame{
 				
 		this.getContentPane().add(dugmeKontejner, BorderLayout.CENTER);
 		
-		this.setSize(1024, 720);
+		this.setSize(300, 100);
+		this.setTitle("Aplikacija");
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		this.setVisible(true);
 	}
-	
+	public void start() {
+		this.setVisible(true);
+		this.setLocationRelativeTo(null);
+	}
+	public void stop() {
+		this.setVisible(false);
+	}
 	public void addActionListenerMojiTreninzi(ActionListener al) {
 		this.mojiTreninziDugme.addActionListener(al);
 	}

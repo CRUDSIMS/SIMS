@@ -19,11 +19,7 @@ public class Aplikacija {
 	public static void main(String[] args) {
 		
 		databaseSeed();
-		
-		//Test za proveru da li radi
-//		baza.ispisClanovi();
-//		baza.ispisTreninzi();
-		
+				
 		//TODO: Ovde inicijalizovati kontrolere i view-ove i proslediti im odgovarajuce dependecy-e
 		
 		OtkazivanjeTreningaView otkazView = new OtkazivanjeTreningaView();
@@ -65,6 +61,9 @@ public class Aplikacija {
 		t6.dodajClana(nikolaM);
 		t6.dodajClana(nikolaB);
 		t6.dodajClana(jovan);
+		Trening t7 = baza.createTrening(LocalDateTime.of(2025, 6, 4, 15, 0), "Nikola", 4);
+		t7.dodajClana(anja);
+		Trening t8 = baza.createTrening(LocalDateTime.of(2025, 5, 4, 15, 0), "Nikola", 4);
 	}
 
 }
